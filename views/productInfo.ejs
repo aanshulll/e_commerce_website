@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= product.title %> | BuyKaro</title>
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 20px;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .breadcrumb a {
+      color: #ccc;
+    }
+
+    .breadcrumb span {
+      color: #666;
+      margin: 0 5px;
+    }
+
+    /* Container */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 60px;
+      padding: 20px;
+    }
+
+    /* Left: Image */
+    .product-image {
+      flex: 1 1 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      background-color: #111;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Right: Details */
+    .product-details {
+      flex: 1 1 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .product-details h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f5c518;
+      font-size: 1.1rem;
+    }
+
+    .rating span {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .stock {
+      color: #00ff80;
+      font-weight: 500;
+    }
+
+    .product-details p {
+      color: #ccc;
+      line-height: 1.6;
+      margin: 5px 0;
+      font-size: 1rem;
+    }
+
+    .product-details strong {
+      color: #fff;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    /* Quantity & Buttons */
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quantity input {
+      width: 60px;
+      padding: 6px 10px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .buttons button,
+    .buttons a {
+      text-decoration: none;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .add-to-cart {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .add-to-cart:hover {
+      background-color: #ccc;
+    }
+
+    .buy-now {
+      background-color: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
+    }
+
+    .buy-now:hover {
+     background-color: #ccc;
+      color: #000;
+    }
+
+    .wishlist {
+      background: none;
+      color: #999;
+      border: 1px solid #333;
+    }
+
+    .wishlist:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #222;
+      margin: 20px 0;
+    }
+
+    /* Description */
+    .description {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .description h2 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    /* Related Products */
+    .related {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .related h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .related-item {
+      background: #111;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .related-item:hover {
+      background: #1a1a1a;
+    }
+
+    .related-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .product-details {
+        text-align: center;
+      }
+
+      .action-row, .buttons {
+        justify-content: center;
+      }
+
+      .description, .related {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">Home</a> <span>›</span>
+    <a href="/products">Products</a> <span>›</span>
+    <span><%= product.title %></span>
+  </div>
+
+  <!-- Main Section -->
+  <div class="container">
+    <!-- Image -->
+    <div class="product-image">
+      <% if (product.productImage) { %>
+        <img src="<%= product.productImage %>" alt="<%= product.title %>">
+      <% } else { %>
+        <div style="width:400px;height:400px;background:#111;display:flex;align-items:center;justify-content:center;border-radius:10px;">
+          <p style="color:#666;">No image available</p>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Details -->
+    <div class="product-details">
+      <h1><%= product.title %></h1>
+      <div class="rating">★★★★★ <span>(120 reviews)</span></div>
+      <div class="stock">In Stock</div>
+
+      <p><%= product.productDetails %></p>
+      <p><strong>Features:</strong> <%= product.features %></p>
+      <hr />
+      <div class="price">₹<%= product.price %></div>
+
+      <div class="action-row">
+        <div class="quantity">
+          <label for="qty">Qty:</label>
+          <input type="number" id="qty" name="qty" value="1" min="1" />
+        </div>
+
+        <div class="buttons">
+          <button class="add-to-cart">Add to Cart</button>
+          <a href="/checkout/<%= product._id %>" class="buy-now">Buy Now</a>
+          <button class="wishlist">♡ Wishlist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="description">
+    <h2>Product Description</h2>
+    <p>
+        <%= product.productDetails %>
+    </p>
+  </div>
+
+  <!-- Related Products -->
+
+</body>
+</html>
