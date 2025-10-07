@@ -23,8 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Public auth routes (e.g., /login) must be accessible without auth
 app.use("/", userAuth)
 // Protect the rest
-app.use("/user", user)
-app.use("/products", checkAuth, product)
+app.use("/user",user)
+app.use("/", checkAuth, product)
 app.use("/checkout",checkout)
 
 app.listen(PORT, ()=>
