@@ -1,62 +1,51 @@
 const product = require("../models/product");
- const multer  = require('multer')
- const upload = require("../util/multer")
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 
-
-// creating products on DB
+// Create product with Cloudinary upload
 async function Addproduct(req, res) {
     try {
-        let data = req.body;
-        
-        // With Cloudinary, req.file.path will be the Cloudinary URL
-        const pic = req.file.path; // This is now the Cloudinary URL
-        
-        const newitem = await product.create({
+        if (!req.file) return res.status(400).send("No file uploaded");
+
+        // Upload file to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: "ecommerce-products",
+            transformation: [{ width: 500, height: 500, crop: "limit" }]
+        });
+
+        // Optional: remove local file
+        fs.unlinkSync(req.file.path);
+
+        // Save product in DB
+        const data = req.body;
+        const newItem = await product.create({
             title: data.title,
             productDetails: data.productDetails,
             features: data.features,
             price: data.price,
-            productImage: pic // Store the Cloudinary URL
+            productImage: result.secure_url
         });
 
-        console.log("Product created successfully:", newitem);
+        console.log("Product created:", newItem);
         res.render("uploadedDone");
-    } catch (error) {
-        console.error("Error creating product:", error);
+    } catch (err) {
+        console.error(err);
         res.status(500).send("Error creating product");
     }
 }
-// This function is no longer needed as Cloudinary handles uploads automatically
-//showing only selected product
-async function SelectedItem(req,res) {
 
-    let item = await product.findById(req.params.id);
-  
-   
-    
-    res.render("productInfo", {product: item});
+async function SelectedItem(req, res) {
+    const item = await product.findById(req.params.id);
+    res.render("productInfo", { product: item });
 }
 
-//showing all product
 async function AllItems(req, res) {
-
-    let alldata = await product.find({})
-
-    
+    const alldata = await product.find({});
     res.render("home", { products: alldata });
-
-    
-}
-async function redirectToProductPage(req,res) {
-
-    res.render("uploadProduct")
-    
 }
 
-module.exports = 
-    {
-        Addproduct,
-        SelectedItem,
-        AllItems,
-        redirectToProductPage
-    }
+async function redirectToProductPage(req, res) {
+    res.render("uploadProduct");
+}
+
+module.exports = { Addproduct, SelectedItem, AllItems, redirectToProductPage };

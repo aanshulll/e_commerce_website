@@ -1,17 +1,7 @@
-const multer = require("multer")
-const { v2: cloudinary } = require('cloudinary');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require("multer");
 
-// Configure Cloudinary storage
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'ecommerce-products', // folder in Cloudinary
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    transformation: [{ width: 500, height: 500, crop: 'limit' }] // resize images
-  }
-});
-
-const upload = multer({ storage: storage });
+// Use diskStorage just to hold the file temporarily
+const storage = multer.diskStorage({});
+const upload = multer({ storage });
 
 module.exports = upload;

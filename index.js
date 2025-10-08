@@ -35,7 +35,7 @@ app.use("/", userAuth); // contains /login and /logout
 app.use("/", homeRoute); // any static pages
 
 // Protected routes
-app.use("/user", checkAuth, user);
+app.use("/user", user);
 app.use("/products", checkAuth, product);
 app.use("/checkout", checkAuth, checkout);
 app.use("/profile", checkAuth, userProfile);
