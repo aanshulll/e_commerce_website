@@ -10,7 +10,7 @@ function setUser(email, password) {
         password: password
     },
     secret,
-    { expiresIn: "7d" }
+    { expiresIn: "1h" }
    )
 }
 

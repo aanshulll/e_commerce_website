@@ -14,6 +14,80 @@
       padding: 0;
     }
 
+    /* Navbar */
+    nav {
+      background-color: #111;
+      border-bottom: 1px solid #222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #00ff80;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        border-top: 1px solid #222;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
     header {
       text-align: center;
       padding: 40px 20px 20px;
@@ -147,11 +221,31 @@
 </head>
 
 <body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">BuyKaro</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="/">Home</a>
+           <a href="/cart">Cart</a>
+      <a href="/profile">Profile</a>
+      <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
   <header>
     <h1>Welcome to BuyKaro</h1>
     <p>Your one-stop shop for all your needs!</p>
   </header>
 
+  <!-- Product Grid -->
   <div class="products">
     <% products.forEach(function(product) { %>
       <div class="product">
@@ -172,10 +266,18 @@
 
         <div class="buttons">
           <button>Add to Cart</button>
-          <a href="<%= product._id %>">Buy Now</a>
+          <a href="/products/<%= product._id %>">Buy Now</a>
         </div>
       </div>
     <% }); %>
   </div>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

@@ -1,212 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Checkout</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body { 
-            font-family: "Poppins", sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8" />
+  <title>Checkout | BuyKaro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
 
-        h2 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 30px;
-        }
+    h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+    }
 
-        .checkout-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #111;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
-        }
+    .checkout-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #111;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
 
-        .product {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            background-color: #1a1a1a;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
+    .product {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
 
-        .product img {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin-right: 20px;
-        }
+    .product img {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
 
-        .product-details {
-            flex: 1;
-        }
+    .product-details {
+      flex: 1;
+    }
 
-        .product-details h3 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #fff;
-        }
+    .product-details h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #fff;
+    }
 
-        .product-details p {
-            margin: 8px 0;
-            color: #bbb;
-        }
+    .product-details p {
+      margin: 8px 0;
+      color: #bbb;
+    }
 
-        .price {
-            font-size: 1.2rem;
-            color: #00ff80;
-            font-weight: 600;
-        }
+    .price {
+      font-size: 1.2rem;
+      color: #00ff80;
+      font-weight: 600;
+    }
 
-        .form-section {
-            background-color: #1a1a1a;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
+    .quantity-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: #ccc;
-        }
+    .quantity-section input {
+      width: 70px;
+      padding: 6px;
+      border-radius: 8px;
+      background-color: #222;
+      border: 1px solid #333;
+      color: #fff;
+      text-align: center;
+    }
 
-        input[type="text"], input[type="tel"], textarea {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #222;
-            color: #fff;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
+    .total {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #00ff80;
+    }
 
-        input[type="radio"] {
-            accent-color: #00ff80;
-        }
+    .form-section {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
 
-        .pay-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #00ff80;
-            border: none;
-            border-radius: 10px;
-            color: #000;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #ccc;
+    }
 
-        .pay-btn:hover {
-            background-color: #00cc66;
-        }
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #222;
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
 
-        @media (max-width: 768px) {
-            .product {
-                flex-direction: column;
-                text-align: center;
-            }
+    input[type="radio"] {
+      accent-color: #00ff80;
+    }
 
-            .product img {
-                margin-bottom: 15px;
-                margin-right: 0;
-                width: 100%;
-                max-width: 250px;
-            }
-        }
-    </style>
+    .pay-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #00ff80;
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pay-btn:hover {
+      background-color: #00cc66;
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .product img {
+        margin-bottom: 15px;
+        margin-right: 0;
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
 </head>
 <body>
-
+  <form action="/checkout/<%= product._id %>" method="POST">
     <div class="checkout-container">
-        <h2>Checkout</h2>
+      <h2>Checkout</h2>
 
-        <!-- Product Info -->
-        <div class="product">
-            <img src="<%= product.productImage %>" alt="<%= product.title %>">
-            <div class="product-details">
-                <h3><%= product.title %></h3>
-                <p><%= product.productDetails %></p>
-                <p class="price">₹<%= product.price %></p>
-            </div>
+      <!-- Product Info -->
+      <div class="product">
+        <img src="<%= product.productImage %>" alt="<%= product.title %>">
+        <div class="product-details">
+          <h3"><%= product.title %></h3>
+          <p><%= product.productDetails %></p>
+          <p class="price">Price: ₹<span id="unitPrice"><%= product.price %></span></p>
+
+          <div class="quantity-section">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+          </div>
+
+          <div class="total">
+            Total: ₹<span id="totalPrice"><%= product.price %></span>
+          </div>
+          <input type="hidden" id="hiddenTotal" name="totalPrice" value="<%= product.price %>">
         </div>
-        <form action="/checkout" method="POST">
-        <!-- Customer Info -->
-        <div class="form-section">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Your Name" value="<%= user.username %>">
+      </div>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" placeholder="10-digit number" value="<%= user.phoneNumber %>">
+      <!-- Checkout Form -->
+      <div class="form-section">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="fullName" placeholder="Your Name" value="<%= user.username %>" required>
 
-            <label for="address">Delivery Address</label>
-            <textarea id="address" rows="3" placeholder="Enter your full address"><%= user.deliveryAddress %></textarea>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phoneNumber" placeholder="10-digit number" value="<%= user.phoneNumber || '' %>" required>
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" name="deliveryAddress" rows="3" placeholder="Enter your full address" required><%= user.deliveryAddress || '' %></textarea>
+      </div>
+
+      <!-- Payment -->
+      <div class="form-section">
+        <label>Select Payment Method:</label>
+        <div style="margin-bottom: 15px;">
+          <!-- <input type="radio" name="paymentMethod" value="UPI" id="upi" checked>
+          <label for="upi" style="display:inline;">UPI</label><br> -->
+          <input type="radio" name="paymentMethod" value="COD" id="cod">
+          <label for="cod" style="display:inline;">Cash on Delivery</label>
         </div>
 
-        <!-- Payment Method -->
-        <div class="form-section">
-            <label>Select Payment Method:</label>
-            <div style="margin-bottom: 15px;">
-                <input type="radio" name="payment" value="UPI" id="upi" checked> <label for="upi" style="display:inline;">UPI</label><br>
-                <input type="radio" name="payment" value="COD" id="cod"> <label for="cod" style="display:inline;">Cash on Delivery</label>
-            </div>
+        <!-- <div id="upiSection">
+          <label>Enter UPI ID</label>
+          <input type="text" id="upiId" name="upiId" placeholder="example@upi">
+        </div> -->
+      </div>
 
-            <div id="upiSection">
-                <label>Enter UPI ID</label>
-                <input type="text" id="upiId" placeholder="example@upi">
-            </div>
-        </div>
-
-        <button class="pay-btn" type="submit">Place Order</button>
+      <button class="pay-btn" type="submit">Place Order</button>
     </div>
-    </form>
+  </form>
 
-    <script>
-        const upiRadio = document.getElementById('upi');
-        const codRadio = document.getElementById('cod');
-        const upiSection = document.getElementById('upiSection');
+  <script>
+    const quantityInput = document.getElementById('quantity');
+    const unitPrice = parseFloat(document.getElementById('unitPrice').textContent);
+    const totalPriceEl = document.getElementById('totalPrice');
+    const hiddenTotal = document.getElementById('hiddenTotal');
+    const upiRadio = document.getElementById('upi');
+    const codRadio = document.getElementById('cod');
+    const upiSection = document.getElementById('upiSection');
 
-        upiRadio.addEventListener('change', () => upiSection.style.display = 'block');
-        codRadio.addEventListener('change', () => upiSection.style.display = 'none');
+    // Toggle UPI section
+    // upiRadio.addEventListener('change', () => upiSection.style.display = 'block');
+    // codRadio.addEventListener('change', () => upiSection.style.display = 'none');
 
-        function pay() {
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const address = document.getElementById('address').value.trim();
-
-            if (!name || !phone || !address) {
-                alert('⚠️ Please fill all customer details.');
-                return;
-            }
-
-            const productName = "<%= product.name %>";
-            const productPrice = "<%= product.price %>";
-
-            if (paymentMethod === 'UPI') {
-                const upiId = document.getElementById('upiId').value.trim();
-                if (!upiId) {
-                    alert('⚠️ Please enter UPI ID.');
-                    return;
-                }
-                alert(`✅ Payment Successful!\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nProduct: ${productName}\nAmount: ₹${productPrice}\nPaid via UPI: ${upiId}`);
-            } else {
-                alert(`🛒 Order Placed!\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nProduct: ${productName}\nAmount: ₹${productPrice}\nPayment Method: Cash on Delivery`);
-            }
-        }
-    </script>
-
+    // Update total price dynamically
+    quantityInput.addEventListener('input', () => {
+      const qty = parseInt(quantityInput.value) || 1;
+      const total = (unitPrice * qty).toFixed(2);
+      totalPriceEl.textContent = total;
+      hiddenTotal.value = total;
+    });
+  </script>
 </body>
 </html>

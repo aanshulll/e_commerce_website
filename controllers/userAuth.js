@@ -1,28 +1,23 @@
-const users = require("../models/users")
-const { setUser } = require("../util/auth")
-const products = require("../models/product")
-
-
+const users = require("../models/users");
+const { setUser } = require("../util/auth");
+const products = require("../models/product");
 
 async function handlerLogin(req, res) {
+    const { email, password } = req.body;
 
-    let email = req.body.email;
-    let password = req.body.password;
-
-    let userData = await users.findOne({ email: email, password: password });
-    console.log(userData);
+    const userData = await users.findOne({ email, password });
 
     if (userData) {
-        const sessionID = setUser(userData.email, userData.password)
-        res.cookie("sessionID", sessionID, { httpOnly: true });
+        const sessionID = setUser(userData.email, userData.password);
+
+        // Set cookie with consistent options
+        res.cookie("sessionID", sessionID, { httpOnly: true, path: "/" });
+
         const allProducts = await products.find();
         res.render("home", { products: allProducts });
+    } else {
+        res.render("invalidCredentials");
     }
-    else {
-        res.render("invalidCredentials")
-    }
-
-
 }
 
 module.exports = { handlerLogin };
